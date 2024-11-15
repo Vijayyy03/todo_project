@@ -3,36 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task List</title>
+    <title>Task List with Dark Mode Toggle</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
+        /* Light Mode Styling */
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #ffdfba, #ffb3d9);  /* Light soft pink gradient */
+            font-family: 'Poppins', sans-serif;
+            color: #333;
         }
         .task-card {
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .task-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(255, 72, 133, 0.2); /* Glowing hover effect */
         }
         .task-header {
             font-weight: bold;
             font-size: 1.25rem;
+            color: #ff6fb2;  /* Soft pink */
         }
         .btn-custom {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            background: linear-gradient(to right, #ff6fb2, #ff4785);  /* Soft pink gradient */
             color: white;
+            border-radius: 50px;
+            font-weight: bold;
         }
         .btn-custom:hover {
-            background: linear-gradient(to right, #2575fc, #6a11cb);
+            background: linear-gradient(to right, #ff4785, #ff6fb2);  /* Reverse gradient */
             color: white;
+        }
+        .badge {
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .badge.bg-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .badge.bg-warning {
+            background-color: #ffad33;
+            color: #333;
+        }
+
+        /* Dark Mode Styling */
+        body.dark-mode {
+            background: #121212; /* Dark background */
+            color: #fff;
+        }
+        body.dark-mode .task-header {
+            color: #ff6fb2; /* Soft pink */
+        }
+        body.dark-mode .task-card {
+            background-color: #1f1f1f; /* Dark card background */
+            color: #fff;
+        }
+        body.dark-mode .btn-custom {
+            background: linear-gradient(to right, #ff4785, #ff6fb2); /* Reverse pink gradient */
+        }
+        body.dark-mode .badge.bg-success {
+            background-color: #008000; /* Dark green */
+        }
+        body.dark-mode .badge.bg-warning {
+            background-color: #ff7f50; /* Soft coral */
+        }
+        body.dark-mode .btn-custom:hover {
+            background: linear-gradient(to right, #ff6fb2, #ff4785); /* Reverse gradient on hover */
+        }
+        /* Toggle Button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff4785;  /* Soft pink */
+            border: none;
+            border-radius: 50%;
+            padding: 12px;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-5">📝 Your Task List</h1>
+        <h1 class="text-center mb-5" style="color: #ff6fb2;">📝 Your Task List</h1>
         
         <div class="d-flex justify-content-between align-items-center mb-4">
             <p class="text-muted">Manage your tasks efficiently.</p>
@@ -74,6 +136,17 @@
             </div>
         {% endif %}
     </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+
+    <script>
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

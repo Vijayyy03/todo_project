@@ -7,51 +7,138 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #ffdfba, #ffb3d9); /* Soft pastel gradient */
+            font-family: 'Poppins', sans-serif; /* Modern and clean font */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
         }
+
         .task-container {
             max-width: 600px;
-            margin-top: 50px;
+            width: 100%;
             padding: 30px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95); /* Soft white background */
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            animation: fadeIn 0.6s ease-out;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6fb2; /* Soft pink */
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 5px rgba(255, 111, 178, 0.5);
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
         .status-badge {
-            font-size: 0.9rem;
-            padding: 0.5em 0.8em;
-            border-radius: 8px;
+            font-size: 1rem;
+            padding: 0.5em 1.2em;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        .status-badge.bg-success {
+            background: #6fe7a7; /* Soft green */
+            color: #fff;
+        }
+
+        .status-badge.bg-warning {
+            background: #ffcc5c; /* Soft yellow */
+            color: #fff;
+        }
+
         .btn-custom {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: white;
+            font-size: 1rem;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff;
+            transition: all 0.3s ease;
+            background-color: #ff6fb2; /* Soft pink */
+            display: inline-block;
         }
+
         .btn-custom:hover {
-            background: linear-gradient(to right, #2575fc, #6a11cb);
-            color: white;
+            transform: translateY(-5px) scale(1.05);
+            background-color: #ff4785; /* Slightly darker pink */
+        }
+
+        .btn-custom.btn-warning {
+            background-color: #ffcc5c; /* Soft yellow */
+        }
+
+        .btn-custom.btn-warning:hover {
+            background-color: #ffb34d; /* Slightly darker yellow */
+        }
+
+        .btn-custom.btn-danger {
+            background-color: #ff6b6b; /* Soft red */
+        }
+
+        .btn-custom.btn-danger:hover {
+            background-color: #ff5252; /* Slightly darker red */
+        }
+
+        .btn-custom.btn-secondary {
+            background-color: #f3f4f6; /* Light gray */
+            color: #333;
+        }
+
+        .btn-custom.btn-secondary:hover {
+            background-color: #e2e8f0; /* Slightly darker gray */
+        }
+
+        .d-flex > * {
+            flex: 1;
+            margin: 0 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container d-flex justify-content-center">
-        <div class="task-container">
-            <h1 class="mb-3">{{ task.title }}</h1>
-            <p><strong>Description:</strong></p>
-            <p class="text-muted">{{ task.description }}</p>
-            <p><strong>Due Date:</strong> {{ task.due_date }}</p>
-            <p><strong>Status:</strong> 
-                {% if task.completed %}
-                    <span class="status-badge bg-success text-white">Completed</span>
-                {% else %}
-                    <span class="status-badge bg-warning text-dark">Pending</span>
-                {% endif %}
-            </p>
-            
-            <div class="d-flex justify-content-between mt-4">
-                <a href="{% url 'task_edit' task.id %}" class="btn btn-warning">Edit Task</a>
-                <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">Delete Task</a>
-                <a href="{% url 'task_list' %}" class="btn btn-secondary">Back to Task List</a>
-            </div>
+    <div class="task-container">
+        <h1>{{ task.title }}</h1>
+        <p><strong>Description:</strong></p>
+        <p>{{ task.description }}</p>
+        <p><strong>Due Date:</strong> {{ task.due_date }}</p>
+        <p><strong>Status:</strong> 
+            {% if task.completed %}
+                <span class="status-badge bg-success">Completed</span>
+            {% else %}
+                <span class="status-badge bg-warning">Pending</span>
+            {% endif %}
+        </p>
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'task_edit' task.id %}" class="btn btn-custom btn-warning">Edit Task</a>
+            <a href="{% url 'task_delete' task.id %}" class="btn btn-custom btn-danger">Delete Task</a>
+            <a href="{% url 'task_list' %}" class="btn btn-custom btn-secondary">Back</a>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

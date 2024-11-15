@@ -6,49 +6,107 @@
     <title>Create Task</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
+        /* Background Styles */
         body {
-            background-color: #f0f2f5;
+            background: linear-gradient(135deg, #ffdfba, #ffb3d9);  /* Soft pastel gradient */
+            font-family: 'Poppins', sans-serif;
+            color: #333;  /* Dark text color for contrast */
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            margin: 0;
         }
+
+        /* Form Container */
         .form-container {
-            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);  /* Soft white background for the form */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.2);  /* Subtle 3D shadows */
             width: 100%;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            transform: perspective(1000px) rotateX(5deg);  /* Adding perspective */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;  /* Smooth transition */
         }
+
+        .form-container:hover {
+            transform: perspective(1000px) rotateX(0deg);  /* Subtle 3D hover effect */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 16px 40px rgba(0, 0, 0, 0.3);  /* Deeper shadows on hover */
+        }
+
+        /* Form Title */
         .form-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ff6fb2; /* Soft pink */
             text-align: center;
+            margin-bottom: 30px;
         }
+
+        /* Labels and Input Fields */
         .form-label {
             font-weight: 600;
             color: #555;
         }
+
+        .form-control {
+            background: #f7f7f7;  /* Light gray background for inputs */
+            border: 1px solid #ccc;  /* Soft border for inputs */
+            border-radius: 5px;
+            padding: 12px;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);  /* Inset shadow for 3D depth */
+        }
+
+        .form-control:focus {
+            border-color: #ff6fb2;  /* Soft pink border on focus */
+            box-shadow: 0 0 8px rgba(255, 111, 178, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.1);  /* Soft pink shadow effect */
+        }
+
+        /* Buttons */
         .btn-save {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-color: #ff6fb2;  /* Soft pink */
             color: white;
             font-weight: bold;
             border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 111, 178, 0.3);  /* Button shadow */
         }
+
         .btn-save:hover {
-            background: linear-gradient(135deg, #764ba2, #667eea);
-            color: white;
+            background-color: #ff4785;  /* Slightly darker pink on hover */
+            transform: translateY(-3px);  /* Lift effect */
+            box-shadow: 0 8px 20px rgba(255, 111, 178, 0.5);  /* Enhanced shadow on hover */
         }
+
         .btn-cancel {
-            background-color: #ccc;
-            color: #555;
+            background-color: #f8f9fa;
+            color: #ff6fb2;  /* Soft pink text */
             font-weight: bold;
+            border: 1px solid #ff6fb2;
+            padding: 12px 24px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
+
         .btn-cancel:hover {
-            background-color: #bbb;
+            background-color: #f0f0f0;
+            color: #ff4785;  /* Slightly darker pink on hover */
+            transform: translateY(-3px);  /* Lift effect */
+            box-shadow: 0 5px 15px rgba(255, 111, 178, 0.3);  /* Button shadow on hover */
+        }
+
+        /* Form Controls and Spacing */
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-check-label {
+            color: #555;  /* Lighter color for checkboxes */
         }
     </style>
 </head>
@@ -58,15 +116,15 @@
         
         <form method="post">
             {% csrf_token %}
-            <div class="mb-4">
+            <div class="mb-3">
                 <label for="id_title" class="form-label">Task Title</label>
                 {{ form.title }}
             </div>
-            <div class="mb-4">
+            <div class="mb-3">
                 <label for="id_description" class="form-label">Description</label>
                 {{ form.description }}
             </div>
-            <div class="mb-4">
+            <div class="mb-3">
                 <label for="id_due_date" class="form-label">Due Date</label>
                 {{ form.due_date }}
             </div>

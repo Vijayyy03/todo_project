@@ -4,18 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Task</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffdfba, #ffb3d9);  /* Soft pastel gradient */
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);  /* Soft white background for the form */
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+
+        .form-container:hover {
+            transform: rotateX(0);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-title {
+            font-size: 2.2rem;
+            color: #ff6fb2;  /* Soft pink */
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 0 0 5px #ff6fb2, 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        .form-label {
+            color: #ff6fb2;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            background: #f7f7f7;  /* Light gray background */
+            border: 1px solid #ff6fb2;
+            color: #333;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #ff6fb2;
+            box-shadow: 0 0 5px rgba(255, 111, 178, 0.5);
+            outline: none;
+        }
+
+        .btn-danger {
+            background-color: #ff6fb2;  /* Soft pink */
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-danger:hover {
+            background-color: #ff4785;  /* Darker pink on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background-color: #f8f9fa;  /* Light grayish pink */
+            color: #ff6fb2;  /* Soft pink text */
+            font-weight: bold;
+            border: 1px solid #ff6fb2;
+            padding: 12px 30px;
+            border-radius: 50px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+            color: #ff4785;  /* Darker pink */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .form-check-label {
+            color: #ff6fb2;
+        }
+
+        .form-check-input {
+            background: #f7f7f7;  /* Soft background for checkboxes */
+            border: 1px solid #ff6fb2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .form-title {
+                font-size: 1.8rem;
+            }
+
+            .btn-danger, .btn-secondary {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container my-4">
-        <h1>Delete Task</h1>
-        <p>Are you sure you want to delete "<strong>{{ task.title }}</strong>"?</p>
-        
-        <form method="post">
+    <div class="form-container">
+        <h1 class="form-title">Delete Task</h1>
+        <form method="post" action="{% url 'delete_task' task.id %}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Yes, Delete</button>
-            <a href="{% url 'task_list' %}" class="btn btn-secondary">Cancel</a>
+            <p>Are you sure you want to delete the task: <strong>{{ task.title }}</strong>?</p>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-danger">Delete Task</button>
+                <a href="{% url 'task_list' %}" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
