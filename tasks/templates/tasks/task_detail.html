@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .task-container {
+            max-width: 600px;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .status-badge {
+            font-size: 0.9rem;
+            padding: 0.5em 0.8em;
+            border-radius: 8px;
+        }
+        .btn-custom {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+        .btn-custom:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <div class="task-container">
+            <h1 class="mb-3">{{ task.title }}</h1>
+            <p><strong>Description:</strong></p>
+            <p class="text-muted">{{ task.description }}</p>
+            <p><strong>Due Date:</strong> {{ task.due_date }}</p>
+            <p><strong>Status:</strong> 
+                {% if task.completed %}
+                    <span class="status-badge bg-success text-white">Completed</span>
+                {% else %}
+                    <span class="status-badge bg-warning text-dark">Pending</span>
+                {% endif %}
+            </p>
+            
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'task_edit' task.id %}" class="btn btn-warning">Edit Task</a>
+                <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">Delete Task</a>
+                <a href="{% url 'task_list' %}" class="btn btn-secondary">Back to Task List</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

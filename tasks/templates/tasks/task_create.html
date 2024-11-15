@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Task</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .form-container {
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #555;
+        }
+        .btn-save {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+            border: none;
+        }
+        .btn-save:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #ccc;
+            color: #555;
+            font-weight: bold;
+        }
+        .btn-cancel:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container form-container">
+        <h1 class="form-title">Create New Task</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="id_title" class="form-label">Task Title</label>
+                {{ form.title }}
+            </div>
+            <div class="mb-4">
+                <label for="id_description" class="form-label">Description</label>
+                {{ form.description }}
+            </div>
+            <div class="mb-4">
+                <label for="id_due_date" class="form-label">Due Date</label>
+                {{ form.due_date }}
+            </div>
+            <div class="form-check mb-4">
+                {{ form.completed }}
+                <label for="id_completed" class="form-check-label">Mark as Completed</label>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-save">Save Task</button>
+                <a href="{% url 'task_list' %}" class="btn btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
